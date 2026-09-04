@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEX 클럽</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; line-height: 1.6; overflow-x: hidden; }
+
+        /* 네비게이션 */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .logo { font-size: 22px; font-weight: 900; color: #38bdf8; }
+        nav a { color: #cbd5e1; text-decoration: none; margin-left: 20px; font-size: 15px; transition: color 0.3s; }
+        nav a:hover { color: #38bdf8; }
+
+        /* 히어로 섹션 (16:9 동영상 비율 고정 레이아웃) */
+        .hero {
+            position: relative; 
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 120px 20px 60px 20px;
+        }
+
+        /* 💡 16:9 비율을 완벽히 유지해 주는 동영상 컨테이너 */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* PC나 태블릿에서 너무 커지지 않도록 최대 크기 제한 */
+            aspect-ratio: 16 / 9; /* 핵심: 항상 16:9 비율 유지 */
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .bg-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 비율 유지하며 상자 안에 깔끔하게 맞춤 */
+            display: block;
+        }
+
+        /* 애니메이션 효과 */
+        .fade-in {
+            animation: fadeInUp 1.2s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 { font-size: 38px; font-weight: 900; margin-bottom: 10px; color: #fff; }
+        .hero h1 span { color: #38bdf8; }
+        .hero p { font-size: 16px; color: #94a3b8; margin-bottom: 25px; max-width: 500px; }
+
+        /* 버튼 스타일 */
+        .btn {
+            display: inline-block; padding: 12px 28px;
+            background-color: #38bdf8; color: #0f172a;
+            font-weight: 700; border-radius: 30px; text-decoration: none;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .btn:hover { background-color: #0ea5e9; transform: scale(1.05); }
+
+        /* 일반 섹션 */
+        section { padding: 80px 20px; max-width: 900px; margin: 0 auto; text-align: center; }
+        section h2 { font-size: 28px; margin-bottom: 15px; color: #f8fafc; }
+        section p { color: #94a3b8; margin-bottom: 30px; }
+
+        /* 카드 그리드 */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card {
+            background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px; border-radius: 12px; transition: transform 0.3s, border-color 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: #38bdf8; }
+        .card h3 { margin-bottom: 10px; color: #38bdf8; }
+
+        /* APEX 의미 전용 4열 그리드 스타일 */
+        .apex-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .apex-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .apex-card .letter {
+            font-size: 32px;
+            font-weight: 900;
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
+        .apex-card .word {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* 푸터 */
+        footer { text-align: center; padding: 25px; background: #090d16; color: #64748b; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 메뉴 -->
+    <header>
+        <div class="logo">APEX</div>
+        <nav>
+            <a href="#home">홈</a>
+            <a href="#about">소개</a>
+            <a href="#activities">활동</a>
+            <a href="#contact">문의</a>
+        </nav>
+    </header>
+
+    <!-- 메인 홈 (16:9 동영상 컨테이너 적용) -->
+    <section id="home" class="hero">
+        <div class="fade-in" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            
+            <!-- 16:9 비율이 딱 맞는 동영상 박스 -->
+            <div class="video-container">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="ISSA_INTRODUCE.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <h1>Welcome to <span>APEX</span></h1>
+            <p>최고를 향해 함께 달리는 우리들의 모임</p>
+            <a href="#contact" class="btn">가입 문의하기</a>
+        </div>
+    </section>
+
+    <!-- 클럽 소개 및 APEX 의미 -->
+    <section id="about">
+        <h2>About APEX</h2>
+        <p>APEX는 각자의 분야에서 정상(Apex)을 향해 도전하고 서로의 성장을 돕는 열정적인 클럽입니다.</p>
+        
+        <!-- APEX 철학 카드 -->
+        <div class="apex-grid">
+            <div class="apex-card">
+                <div class="letter">A</div>
+                <div class="word">ABOVE</div>
+            </div>
+            <div class="apex-card">
+                <div class="letter">P</div>
+                <div class="word">POWER</div>
+            </div>
+            <div class="apex-card">
+                <div class="letter">E</div>
+                <div class="word">ELITE</div>
+            </div>
+            <div class="apex-card">
+                <div class="letter">X</div>
+                <div class="word">XYLEM</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 활동 내용 -->
+    <section id="activities">
+        <h2>Our Activities</h2>
+        <p>우리가 함께 만들어가는 멋진 활동들입니다.</p>
+        <div class="grid">
+            <div class="card">
+                <h3>정기 모임</h3>
+                <p>주기적인 만남을 통해 소통하고 친목을 다집니다.</p>
+            </div>
+            <div class="card">
+                <h3>프로젝트</h3>
+                <p>공동의 목표를 세우고 함께 결과물을 만듭니다.</p>
+            </div>
+            <div class="card">
+                <h3>네트워킹</h3>
+                <p>다양한 멤버들과 경험을 나누고 인맥을 넓힙니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 문의하기 -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>APEX와 함께하고 싶으신가요?</p>
+        <a href="mailto:your-email@example.com" class="btn">이메일 보내기</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 APEX Club. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
